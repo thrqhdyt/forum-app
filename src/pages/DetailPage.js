@@ -79,7 +79,7 @@ function DetailPage() {
 
   const allComment = threadDetail.comments.map((comment) => ({
     ...comment,
-    user: users.find((user) => user.id === threadDetail.comments.id),
+    user: users.find((user) => user.id === comment.id),
     authUser: authUser.id,
   }));
 

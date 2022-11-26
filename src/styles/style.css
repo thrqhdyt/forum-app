@@ -237,6 +237,7 @@ body {
   color: var(--foreground-color);
   font-size: 32px;
   margin-bottom: 15px;
+  overflow: hidden;
 }
 
 .thread-item__detail header {
@@ -283,6 +284,7 @@ body {
   margin: 20px 0;
   font-size: 20px;
   font-weight: 400;
+  overflow: hidden;
 }
 
 hr {
@@ -426,6 +428,7 @@ hr {
 .thread-detail__title h3 {
   font-size: 36px;
   font-weight: 600;
+  overflow: hidden;
 }
 
 .thread-detail-item {
@@ -553,6 +556,7 @@ hr {
   font-size: 32px;
   height: 50px;
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  cursor: pointer;
 }
 
 .comment-list {
@@ -636,4 +640,141 @@ hr {
   border: none;
   font-size: 17px;
   cursor: pointer;
+}
+
+.board-page {
+  margin: 2rem auto;
+  padding: 3rem;
+  max-width: 960px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.board-page h2 {
+  font-size: 32px;
+  text-align: center;
+  color: var(--foreground-color);
+  font-weight: 500;
+}
+
+.leaderboards-list header {
+  display: flex;
+  margin: 1.5rem 0 1rem;
+  justify-content: space-between;
+}
+
+.leaderboards-list__user-label, .leaderboars-list__score-label {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #46459E;
+}
+
+.leaderboard-item__user-info {
+  display: flex;
+  align-items: center;
+}
+
+.leaderboard-item__user-info img {
+  border-radius: 13px;
+  margin-right: 1rem;
+}
+
+.leaderboard-item__user-info p {
+  font-size: 24px;
+}
+
+.leaderboard-item__score {
+  font-size: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+  .register-page__hero {
+    display: none;
+    flex-basis: 0%;  
+  }
+
+  .register-page__main {
+    padding: 0 2rem;
+    flex-basis: 100%;
+  }
+
+  .login-page__hero {
+    display: none;
+    flex-basis: 0%;    
+  }
+
+  .login-page__main {
+    padding: 0 2rem;
+    flex-basis: 100%;
+  }
+
+  .navigation {
+    padding: 15px 5%;
+  }
+
+  .navigation h2 {
+    font-size: 20px;
+  }
+
+  .nav-link {
+    display: flex;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .nav__user-info img {
+    display: none;
+  }
+
+  .nav__user-info button {
+    padding: 7px 12px;
+  }
+
+  .thread-item {
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .thread-item__detail header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thread-item__header-right {
+    margin-top: 10px;
+  }
+
+  .thread-item__category {
+    width: fit-content;
+  }
+
+  .detail-page {
+    padding: 1.5rem;
+  }
+
+  .thread-detail {
+    overflow: hidden;
+  }
+
+  .thread-detail-item header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thread-detail__header-right {
+    margin-top: 2rem;
+  }
+
+  .thread-detail__category {
+    width: fit-content;
+  }
 }
