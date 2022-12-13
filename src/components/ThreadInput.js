@@ -15,7 +15,7 @@ function ThreadInput({ addThread }) {
     <form className="thread-input-form">
       <input type="text" value={title} onChange={onChangeTitle} placeholder="Title" className="thread-input__title" />
       <input type="text" value={category} onChange={onChangeCategory} placeholder="Category (opsional)" className="thread-input__category" />
-      <div className="thread-input__body" contentEditable onInput={onChangeBody} />
+      <div className="thread-input__body" data-testid="input-body" contentEditable onInput={onChangeBody} />
       <button type="submit" onClick={() => addThread({ title, body, category })}>Add Thread</button>
     </form>
   );

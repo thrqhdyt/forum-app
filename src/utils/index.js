@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable import/export */
 function postedAt(date) {
   const now = new Date();
   const posted = new Date(date);
@@ -22,4 +24,15 @@ function postedAt(date) {
   return 'just now';
 }
 
-export { postedAt };
+function allCategoryThreads(threads) {
+  const categories = new Set();
+
+  threads.map((thread) => {
+    categories.add(thread.category);
+  });
+
+  return [...categories];
+}
+
+export { postedAt, allCategoryThreads };
+export * from "./api";

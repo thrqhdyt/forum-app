@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ThreadCategoryItem({ onCategory, category }) {
+function ThreadCategoryItem({ category, onCategoryHandler }) {
   return (
-    <button type="button" onClick={onCategory}>
-      <p>
-        #
-        {category}
-      </p>
+    <button type="button" className="btn-category" onClick={() => { onCategoryHandler(category); }}>
+      #
+      {category}
     </button>
   );
 }
 
 ThreadCategoryItem.propTypes = {
-  onCategory: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
+  onCategoryHandler: PropTypes.func.isRequired,
 };
 
 export default ThreadCategoryItem;

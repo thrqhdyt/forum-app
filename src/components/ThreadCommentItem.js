@@ -6,8 +6,8 @@ import { postedAt } from '../utils/index';
 function ThreadCommentItem({ id, owner, createdAt, content, upVotesBy,
   downVotesBy, upVote, downVote, authUser,
 }) {
-  const isUpVoted = upVotesBy.includes(authUser);
-  const isDownVoted = downVotesBy.includes(authUser);
+  const isUpVoted = upVotesBy.includes(authUser.id);
+  const isDownVoted = downVotesBy.includes(authUser.id);
 
   const onUpVoteComment = (event) => {
     event.stopPropagation();

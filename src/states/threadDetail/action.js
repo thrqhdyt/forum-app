@@ -110,6 +110,7 @@ function asyncToggleUpVoteThreadDetail() {
       await api.upVoteThread(threadDetail.id);
     } catch (error) {
       alert(error.message);
+      dispatch(receiveThreadDetailActionCreator(threadDetail));
     }
   };
 }
@@ -123,6 +124,7 @@ function asyncToggleDownVoteThreadDetail() {
       await api.downVoteThread(threadDetail.id);
     } catch (error) {
       alert(error.message);
+      dispatch(receiveThreadDetailActionCreator(threadDetail));
     }
   };
 }
@@ -135,8 +137,8 @@ function asyncToggleUpVoteComment({ threadId, commentId }) {
     try {
       await api.upVoteComment({ threadId, commentId });
     } catch (error) {
-      alert(error.message);
       dispatch(toggleUpVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }));
+      alert(error.message);
     }
   };
 }

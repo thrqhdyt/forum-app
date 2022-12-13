@@ -23,7 +23,6 @@ function asyncGetLeaderboards() {
       dispatch(receiveLeaderboardsActionCreator(leaderboards));
     } catch (error) {
       alert(error.message);
-      alert('error disini');
     }
 
     dispatch(hideLoading());

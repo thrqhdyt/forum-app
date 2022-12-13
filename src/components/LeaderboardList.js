@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import LeaderboardItem, { leaderboardItemShape } from './LeaderboardItem';
@@ -11,8 +12,8 @@ function LeaderboardList({ leaderboards }) {
       </header>
       <div className="leaderboards-list__item">
         {
-          leaderboards.map((leaderboard) => (
-            <LeaderboardItem key={leaderboard.id} {...leaderboard} />
+          leaderboards.map((leaderboard, index) => (
+            <LeaderboardItem key={index} {...leaderboard} />
           ))
         }
       </div>

@@ -218,6 +218,35 @@ body {
 
 
 /* Thread */
+.category-list {
+  max-width: 960px;
+  margin: 1rem auto;
+}
+
+.category-list h2 {
+  color: #46459E;
+  font-size: 25px;
+}
+
+.btn-category {
+  padding: 8px 10px;
+  margin-top: 8px;
+  margin-right: 12px;
+  background: #E3B9E6;
+  color: #000;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-category:hover {
+  background: #ffffff;
+  color: #46459E;
+  border: 2px solid #46459E;
+}
+
 .threads-list {
   max-width: 960px;
   display: flex;
@@ -737,6 +766,10 @@ hr {
 
   .nav__user-info button {
     padding: 7px 12px;
+  }
+
+  .category-list {
+    margin: 10px;
   }
 
   .thread-item {

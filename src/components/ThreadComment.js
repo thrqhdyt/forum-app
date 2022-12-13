@@ -17,7 +17,7 @@ function ThreadComment({ addComment }) {
     <>
       <h3>New comment :</h3>
       <form className="comment-input">
-        <div className="comment-input__field" data-placeholder="Create new comment..." contentEditable data-value={content} onInput={handleAddComment} />
+        <div className="comment-input__field" data-testid="input-content" data-placeholder="Create new comment..." contentEditable data-value={content} onInput={handleAddComment} />
         <button type="submit" onClick={onAddComment}>+</button>
       </form>
     </>
