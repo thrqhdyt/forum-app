@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import BtnCategory from '../styled/ButtonCategory';
 
 function ThreadCategoryItem({ category, onCategoryHandler }) {
   return (
-    <button type="button" className="btn-category" onClick={() => { onCategoryHandler(category); }}>
+    <BtnCategory type="button" className="btn-category" onClick={() => { onCategoryHandler(category); }}>
       #
       {category}
-    </button>
+    </BtnCategory>
   );
 }
 

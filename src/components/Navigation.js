@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { BsFillChatQuoteFill } from 'react-icons/bs';
 import { MdLeaderboard } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import NavStyle from '../styled/NavStyle';
 
 function Navigation({ authUser, signOut }) {
   const { id, name, avatar } = authUser;
 
   return (
-    <div className="navigation">
+    <NavStyle>
       <Link to="/" style={{ textDecoration: 'none' }}>
         <h2>Forum App</h2>
       </Link>
@@ -28,7 +29,7 @@ function Navigation({ authUser, signOut }) {
         <img src={avatar} alt={id} title={name} />
         <button type="button" onClick={signOut}>Logout</button>
       </div>
-    </div>
+    </NavStyle>
   );
 }
 
