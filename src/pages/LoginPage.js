@@ -19,7 +19,7 @@ function LoginPage() {
       </header>
       <article className="login-page__main">
         <h2>Login</h2>
-        <p className="login-page__quote">Place to share knowledge and better understand the world</p>
+        <p className="login-page__quote">Place to share knowledge and better understand the world.</p>
         <LoginInput login={onLogin} />
         <p className="login-page__text">
           Don&apos;t have an account?
