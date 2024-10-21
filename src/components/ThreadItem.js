@@ -1,30 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { AiFillLike, AiFillDislike, AiOutlineComment } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import { postedAt } from '../utils/index';
+import React from "react";
+import PropTypes from "prop-types";
+import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { postedAt } from "../utils/index";
 
 function ThreadItem({
-  id, title, body, createdAt, category, upVotesBy, downVotesBy, totalComments,
-  authUser, upVote, downVote, user,
+  id,
+  title,
+  body,
+  createdAt,
+  category,
+  upVotesBy,
+  totalComments,
+  authUser,
+  upVote,
+  user,
 }) {
   const isUpVoted = upVotesBy.includes(authUser);
-  const isDownVoted = downVotesBy.includes(authUser);
 
   const onUpVoteThread = (event) => {
     event.stopPropagation();
     upVote(id);
   };
 
-  const onDownVoteThread = (event) => {
-    event.stopPropagation();
-    downVote(id);
-  };
-
   return (
     <div className="thread-item">
       <div className="thread-item__title">
-        <Link to={`/threads/${id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/threads/${id}`} style={{ textDecoration: "none" }}>
           <h3>{title}</h3>
         </Link>
       </div>
@@ -40,47 +42,36 @@ function ThreadItem({
             </div>
           </div>
           <div className="thread-item__header-right">
-            <p className="thread-item__category">
-              #
-              {category}
-            </p>
+            <p className="thread-item__category">#{category}</p>
           </div>
         </header>
         <article>
-          <p className="thread-item__body" dangerouslySetInnerHTML={{ __html: `${body.substring(0, 200)}.....` }} />
+          <p
+            className="thread-item__body"
+            dangerouslySetInnerHTML={{
+              __html: `${body.substring(0, 200)}.....`,
+            }}
+          />
         </article>
         <hr />
         <div className="thread-item__footer">
-          {
-            upVote && (
-              <div className="thread-item__upvotes-thread">
-                <p>
-                  <button type="button" onClick={onUpVoteThread}>
-                    { isUpVoted ? <AiFillLike style={{ color: '#46459E' }} /> : <AiFillLike /> }
-                  </button>
-                  {upVotesBy.length}
-                </p>
-              </div>
-            )
-          }
-
-          {
-            downVote && (
-              <div className="thread-item__downvotes-thread">
-                <p>
-                  <button type="button" onClick={onDownVoteThread}>
-                    { isDownVoted ? <AiFillDislike style={{ color: 'red' }} /> : <AiFillDislike /> }
-                  </button>
-                  {downVotesBy.length}
-                </p>
-              </div>
-            )
-          }
+          {upVote && (
+            <div className="thread-item__upvotes-thread">
+              <p>
+                <button type="button" onClick={onUpVoteThread}>
+                  {isUpVoted ? (
+                    <AiFillHeart style={{ color: "red" }} />
+                  ) : (
+                    <AiOutlineHeart />
+                  )}
+                </button>
+                {upVotesBy.length}
+              </p>
+            </div>
+          )}
 
           <p className="thread-item__total-comments">
-            <AiOutlineComment />
-            {' '}
-            {totalComments}
+            <AiOutlineComment /> {totalComments}
           </p>
         </div>
       </div>
@@ -101,7 +92,6 @@ const threadItemShape = {
   createdAt: PropTypes.string.isRequired,
   category: PropTypes.string,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   totalComments: PropTypes.number.isRequired,
   authUser: PropTypes.string.isRequired,
   user: PropTypes.shape(userShape).isRequired,
@@ -112,7 +102,6 @@ ThreadItem.propTypes = {
 };
 
 ThreadItem.defaultProps = {
-  upVote: null,
   downVote: null,
 };
 

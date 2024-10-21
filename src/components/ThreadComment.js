@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 function ThreadComment({ addComment }) {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const onAddComment = () => {
     addComment(content);
-    setContent('');
+    setContent("");
   };
 
   const handleAddComment = (event) => {
@@ -17,8 +17,17 @@ function ThreadComment({ addComment }) {
     <>
       <h3>New comment :</h3>
       <form className="comment-input">
-        <div className="comment-input__field" data-testid="input-content" data-placeholder="Create new comment..." contentEditable data-value={content} onInput={handleAddComment} />
-        <button type="submit" onClick={onAddComment}>+</button>
+        <div
+          className="comment-input__field"
+          data-testid="input-content"
+          data-placeholder="Create new comment..."
+          contentEditable
+          data-value={content}
+          onInput={handleAddComment}
+        />
+        <button type="submit" onClick={onAddComment}>
+          +
+        </button>
       </form>
     </>
   );

@@ -13,39 +13,21 @@ function threadDetailReducer(threadDetail = null, action = {}) {
           ? threadDetail.upVotesBy.filter((id) => id !== action.payload.userId)
           : threadDetail.upVotesBy.concat([action.payload.userId]),
       };
-    case ActionType.TOGGLE_DOWNVOTE_THREAD_DETAIL:
+    case ActionType.TOGGLE_UPVOTE_COMMENT:
       return {
         ...threadDetail,
-        downVotesBy: threadDetail.downVotesBy.includes(action.payload.userId)
-          ? threadDetail.downVotesBy.filter(
-            (id) => id !== action.payload.userId,
-          )
-          : threadDetail.downVotesBy.concat([action.payload.userId]),
+        comments: threadDetail.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            return {
+              ...comment,
+              upVotesBy: comment.upVotesBy.includes(action.payload.userId)
+                ? comment.upVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.upVotesBy.concat([action.payload.userId]),
+            };
+          }
+          return comment;
+        }),
       };
-    case ActionType.TOGGLE_UPVOTE_COMMENT:
-      return threadDetail.comments.map((comment) => {
-        if (comment.id === action.payload.commentId) {
-          return {
-            ...comment,
-            upVotesBy: comment.upVotesBy.includes(action.payload.userId)
-              ? comment.upVotesBy.filter((id) => id !== action.payload.userId)
-              : comment.upVotesBy.concat([action.payload.userId]),
-          };
-        }
-        return comment;
-      });
-    case ActionType.TOGGLE_DOWNVOTE_COMMENT:
-      return threadDetail.comments.map((comment) => {
-        if (comment.id === action.payload.commentId) {
-          return {
-            ...comment,
-            downVotesBy: comment.downVotesBy.includes(action.payload.userId)
-              ? comment.downVotesBy.filter((id) => id !== action.payload.userId)
-              : comment.downVotesBy.concat([action.payload.userId]),
-          };
-        }
-        return comment;
-      });
     default:
       return threadDetail;
   }

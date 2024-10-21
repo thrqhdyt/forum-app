@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { AiFillLike, AiFillDislike } from 'react-icons/ai';
-import { postedAt } from '../utils/index';
+import React from "react";
+import PropTypes from "prop-types";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { postedAt } from "../utils/index";
 
-function ThreadCommentItem({ id, owner, createdAt, content, upVotesBy,
-  downVotesBy, upVote, downVote, authUser,
+function ThreadCommentItem({
+  id,
+  owner,
+  createdAt,
+  content,
+  upVotesBy,
+  upVote,
+  authUser,
 }) {
-  const isUpVoted = upVotesBy.includes(authUser.id);
-  const isDownVoted = downVotesBy.includes(authUser.id);
+  const isUpVoted = upVotesBy.includes(authUser);
 
   const onUpVoteComment = (event) => {
     event.stopPropagation();
     upVote(id);
-  };
-
-  const onDownVoteComment = (event) => {
-    event.stopPropagation();
-    downVote(id);
   };
 
   return (
@@ -33,30 +33,20 @@ function ThreadCommentItem({ id, owner, createdAt, content, upVotesBy,
         </header>
         <p className="comment-item__content">{content}</p>
         <div className="comment-item__footer">
-          {
-            upVote && (
-              <div className="comment-item__upvotes">
-                <p>
-                  <button type="button" onClick={onUpVoteComment}>
-                    { isUpVoted ? <AiFillLike style={{ color: '#46459E' }} /> : <AiFillLike /> }
-                  </button>
-                  {upVotesBy.length}
-                </p>
-              </div>
-            )
-          }
-          {
-            downVote && (
-              <div className="comment-item__downvotes">
-                <p>
-                  <button type="button" onClick={onDownVoteComment}>
-                    { isDownVoted ? <AiFillDislike style={{ color: 'red' }} /> : <AiFillDislike /> }
-                  </button>
-                  {downVotesBy.length}
-                </p>
-              </div>
-            )
-          }
+          {upVote && (
+            <div className="comment-item__upvotes">
+              <p>
+                <button type="button" onClick={onUpVoteComment}>
+                  {isUpVoted ? (
+                    <AiFillHeart style={{ color: "red" }} />
+                  ) : (
+                    <AiOutlineHeart />
+                  )}
+                </button>
+                {upVotesBy.length}
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <hr />
@@ -74,7 +64,6 @@ const commentItemShape = {
   id: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   content: PropTypes.string.isRequired,
   authUser: PropTypes.string.isRequired,
   owner: PropTypes.shape(ownerShape).isRequired,
@@ -85,7 +74,6 @@ ThreadCommentItem.propTypes = {
 };
 
 ThreadCommentItem.defaultProps = {
-  upVote: null,
   downVote: null,
 };
 

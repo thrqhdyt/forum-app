@@ -1,12 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import BtnCategory from '../styled/ButtonCategory';
+import React from "react";
+import PropTypes from "prop-types";
+import BtnCategory from "../styled/ButtonCategory";
 
 function ThreadCategoryItem({ category, onCategoryHandler }) {
   return (
-    <BtnCategory type="button" className="btn-category" onClick={() => { onCategoryHandler(category); }}>
-      #
-      {category}
+    <BtnCategory
+      type="button"
+      className="btn-category"
+      onClick={() => {
+        onCategoryHandler(category);
+      }}
+    >
+      #{category}
     </BtnCategory>
   );
 }
