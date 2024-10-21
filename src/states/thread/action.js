@@ -1,11 +1,10 @@
-import api from '../../utils/api';
+import api from "../../utils/api";
+import { asyncPopulateUsersAndThreads } from "../shared/action";
 
 const ActionType = {
-  RECEIVE_THREADS: 'RECEIVE_THREADS',
-  ADD_THREAD: 'ADD_THREAD',
-  TOGGLE_UPVOTE_THREAD: 'TOGGLE_UPVOTE_THREAD',
-  TOGGLE_DOWNVOTE_THREAD: 'TOGGLE_DOWNVOTE_THREAD',
-  TOGGLE_NEUTRALVOTE_THREAD: 'TOGGLE_NEUTRALVOTE_THREAD',
+  RECEIVE_THREADS: "RECEIVE_THREADS",
+  ADD_THREAD: "ADD_THREAD",
+  TOGGLE_UPVOTE_THREAD: "TOGGLE_UPVOTE_THREAD",
 };
 
 function receiveThreadsActionCreator(threads) {
@@ -36,17 +35,7 @@ function toggleUpVoteThreadActionCreator({ threadId, userId }) {
   };
 }
 
-function toggleDownVoteThreadActionCreator({ threadId, userId }) {
-  return {
-    type: ActionType.TOGGLE_DOWNVOTE_THREAD,
-    payload: {
-      threadId,
-      userId,
-    },
-  };
-}
-
-function asyncAddThread({ title, body, category = '' }) {
+function asyncAddThread({ title, body, category = "" }) {
   return async (dispatch) => {
     try {
       const thread = await api.createThread({ title, body, category });
@@ -59,28 +48,25 @@ function asyncAddThread({ title, body, category = '' }) {
 
 function asyncToggleUpVoteThread(threadId) {
   return async (dispatch, getState) => {
-    const { authUser } = getState();
-    dispatch(toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }));
+    const { authUser, threads } = getState();
+    const thread = threads.find((t) => t.id === threadId);
+    const hasUpvoted = thread.upVotesBy.includes(authUser.id);
+
+    dispatch(
+      toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id })
+    );
 
     try {
-      await api.upVoteThread(threadId);
+      if (hasUpvoted) {
+        await api.downVoteThread(threadId);
+      } else {
+        await api.upVoteThread(threadId);
+      }
     } catch (error) {
       alert(error.message);
-      dispatch(toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }));
-    }
-  };
-}
-
-function asyncToggleDownVoteThread(threadId) {
-  return async (dispatch, getState) => {
-    const { authUser } = getState();
-    dispatch(toggleDownVoteThreadActionCreator({ threadId, userId: authUser.id }));
-
-    try {
-      await api.downVoteThread(threadId);
-    } catch (error) {
-      alert(error.message);
-      dispatch(toggleDownVoteThreadActionCreator({ threadId, userId: authUser.id }));
+      dispatch(
+        toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id })
+      );
     }
   };
 }
@@ -91,5 +77,4 @@ export {
   addThreadActionCreator,
   asyncAddThread,
   asyncToggleUpVoteThread,
-  asyncToggleDownVoteThread,
 };

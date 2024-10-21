@@ -1,5 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable import/export */
 function postedAt(date) {
   const now = new Date();
   const posted = new Date(date);
@@ -21,7 +19,7 @@ function postedAt(date) {
   if (diffSeconds > 0) {
     return `${diffSeconds} seconds ago`;
   }
-  return 'just now';
+  return "just now";
 }
 
 function allCategoryThreads(threads) {
